@@ -1,0 +1,11 @@
+function (add_xt_module _name)
+  string(TOUPPER _tmp ${_name})
+  set(_build_macro "DLL_${_tmp}")
+  set(_target "Xt${_name}")
+  file(GLOB_RECURSE _src "${_name}/*.cpp" "${_name}/*.h")
+  add_library(${_target} SHARED ${_src})
+  set_target_properties(${_target} PROPERTIES CXX_STANDARD 17)
+  target_compile_definitions(${_target} PRIVATE ${_build_macro}=1)
+endfunction()
+
+add_xt_module(Core)
