@@ -1,6 +1,7 @@
 #ifndef XT_INCLUDED_CORE_OBJECT_H
 #define XT_INCLUDED_CORE_OBJECT_H 1
 
+#include <vector>
 #include <Xt/Core/API.h>
 
 namespace xt
@@ -16,7 +17,10 @@ public:
     const Object* parent() const;
 
 private:
-    Object*     _parent;
+    XT_SYM_HIDDEN void _addChild(Object* object);
+
+    Object*                 _parent;
+    std::vector<Object*>    _children;
 };
 
 }
