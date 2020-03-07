@@ -6,5 +6,5 @@ int main(int argc, char** argv)
     xt::Application app;
     xt::Window win;
 
-    return 0;
+    return app.exec();
 }

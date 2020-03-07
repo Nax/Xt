@@ -3,8 +3,9 @@ function (add_xt_module _name)
   set(_build_macro "XT_EXPORTS_${_tmp}")
   message(STATUS "Hello ${_build_macro}")
   set(_target "Xt${_name}")
-  file(GLOB_RECURSE _src "${_name}/*.cpp" "${_name}/*.h")
-  add_library(${_target} SHARED ${_src})
+  file(GLOB_RECURSE SOURCES "${_name}/*.cpp" "${_name}/*.h")
+  # file(GLOB_RECURSE SOURCES_WINDOWS "${_name}/Arch/Windows/*.cpp" "${_name}/Arch/Windows/*.h")
+  add_library(${_target} SHARED ${SOURCES})
   target_include_directories(
     ${_target}
     PUBLIC "${CMAKE_SOURCE_DIR}/include"

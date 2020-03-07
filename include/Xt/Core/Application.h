@@ -12,7 +12,12 @@ public:
     Application();
     ~Application();
 
+    int exec();
+
     static Application* instance();
+
+private:
+    void* _nativeApplication;
 };
 
 }

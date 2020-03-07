@@ -17,7 +17,8 @@ public:
     void setWidget(Widget* widget);
 
 private:
-    Widget* _widget;
+    void*           _nativeWindow;
+    Widget*         _widget;
 };
 
 }
