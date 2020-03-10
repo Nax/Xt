@@ -3,7 +3,7 @@
 
 #if defined(WIN32) || defined(_WIN32)
 # define XT_OS_WINDOWS 1
-#elif defined(__apple__)
+#elif defined(__APPLE__)
 # define XT_OS_MACOS 1
 #elif defined(__linux__)
 # define XT_OS_LINUX 1

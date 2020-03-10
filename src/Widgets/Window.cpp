@@ -4,6 +4,9 @@
 #if defined(XT_OS_WINDOWS)
 # include <Xt/Widgets/System/Windows/WindowWin32.h>
 using NativeWindow = xt::WindowWin32;
+#elif defined(XT_OS_MACOS)
+# include <Xt/Widgets/System/MacOS/WindowCocoa.h>
+using NativeWindow = xt::WindowCocoa;
 #endif
 
 using namespace xt;

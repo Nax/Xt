@@ -4,7 +4,14 @@ function (add_xt_module _name)
   message(STATUS "Hello ${_build_macro}")
   set(_target "Xt${_name}")
   file(GLOB_RECURSE SOURCES "${_name}/*.cpp" "${_name}/*.h")
-  # file(GLOB_RECURSE SOURCES_WINDOWS "${_name}/Arch/Windows/*.cpp" "${_name}/Arch/Windows/*.h")
+  file(GLOB_RECURSE SOURCES_WINDOWS "${_name}/System/Windows/*.cpp" "${_name}/System/Windows/*.h")
+  file(GLOB_RECURSE SOURCES_MACOS "${_name}/System/MacOS/*.cpp" "${_name}/System/MacOS/*.m" "${_name}/System/MacOS/*.mm" "${_name}/System/MacOS/*.h")
+  list(REMOVE_ITEM SOURCES ${SOURCES_WINDOWS} ${SOURCES_MACOS})
+  if (WIN32)
+    list(APPEND SOURCES ${SOURCES_WINDOWS})
+  elseif(APPLE)
+    list(APPEND SOURCES ${SOURCES_MACOS})
+  endif()
   add_library(${_target} SHARED ${SOURCES})
   target_include_directories(
     ${_target}
@@ -19,3 +26,7 @@ endfunction()
 
 add_xt_module(Core)
 add_xt_module(Widgets Core)
+
+if (APPLE)
+  target_link_libraries(XtCore "-framework Cocoa")
+endif()

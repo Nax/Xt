@@ -3,6 +3,9 @@
 #if defined(XT_OS_WINDOWS)
 # include <Xt/Core/System/Windows/ApplicationWin32.h>
 using NativeApplication = xt::ApplicationWin32;
+#elif defined(XT_OS_MACOS)
+# include <Xt/Core/System/MacOS/ApplicationCocoa.h>
+using NativeApplication = xt::ApplicationCocoa;
 #endif
 
 using namespace xt;
