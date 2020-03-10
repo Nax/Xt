@@ -1,0 +1,41 @@
+name: Xt
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "v*"
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - win64
+          - win32
+          - macos
+        include:
+          - name: win64
+            os: windows-2019
+            cmake_opts: -A x64
+          - name: win32
+            os: windows-2019
+            cmake_opts: -A Win32
+          - name: macos
+            os: macos-latest
+            cmake_opts: -DCMAKE_BUILD_TYPE=Release
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup
+      run: |
+        mkdir build
+    - name: Build
+      run: |
+        cmake .. ${{ matrix.cmake_opts }}
+        cmake --build . --config Release
+      working-directory: ./build
